@@ -7,15 +7,16 @@ import {
   FaIoxhost,
   FaMoneyCheck,
 } from "react-icons/fa6";
+import { NavLink } from "react-router-dom";
 const SideNavBar = () => {
   const [open, setOpen] = useState(true);
   const menuItems = [
-    { title: "Task List", icon: <FaMoneyCheck />, link: "/" },
-    { title: "Add Task ", icon: <FaCirclePlus />, link: "/" },
+    { title: "Task List", icon: <FaMoneyCheck />, link: "/tasklist" },
+    { title: "Add Task ", icon: <FaCirclePlus />, link: "/addtask" },
   ];
 
   return (
-    <div className="">
+    <div>
       <div
         className={`${
           open ? "w-72" : "w-20"
@@ -48,17 +49,18 @@ const SideNavBar = () => {
         <div>
           <ul>
             {menuItems.map((item, index) => (
-              <li
-                key={index}
-                className="flex items-center  gap-5 cursor-pointer hover:bg-orange-400 hover:text-white p-2 rounded-lg duration-200"
-              >
-                {item.icon}
-                <span
-                  className={` ${!open && `hidden duration-200`} font-semibold`}
-                >
-                  {item.title}
-                </span>
-              </li>
+              <NavLink to={item.link} key={index}>
+                <li className="flex items-center  gap-5 cursor-pointer hover:bg-orange-400 hover:text-white p-2 rounded-lg duration-200">
+                  {item.icon}
+                  <span
+                    className={` ${
+                      !open && `hidden duration-200`
+                    } font-semibold`}
+                  >
+                    {item.title}
+                  </span>
+                </li>
+              </NavLink>
             ))}
           </ul>
         </div>
