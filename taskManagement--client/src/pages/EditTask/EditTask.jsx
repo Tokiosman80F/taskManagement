@@ -2,12 +2,13 @@ import { useState } from "react";
 import TopHeader from "../Shared/TopHeader";
 import Swal from "sweetalert2";
 
-const AddTask = () => {
-  const state = ["Active", "In Progress", "Pending", "Complete"];
+const EditTask = () => {
+    const state = ["Active", "In Progress", "Pending", "Complete"];
   const [statuses, setStatuses] = useState([state[0]]);
   const handleSelect = (e) => {
     setStatuses(e.target.value);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -41,14 +42,14 @@ const AddTask = () => {
       });
   };
 
+
   return (
-    <div className="w-full ">
-      <TopHeader>{`Add Your Tasks`}</TopHeader>
-      <div
-        className="flex flex-col  
-                    items-center justify-center "
-      >
-        <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+    <div className="w-full">
+      <TopHeader>{"Edit Task"}</TopHeader>
+      <h2 className="text-center font-bold text-3xl my-5">
+        Update Your Task
+      </h2>
+      <form className="w-full max-w-lg" onSubmit={handleSubmit}>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full  px-3 mb-6 md:mb-0">
               <label className=" uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -114,16 +115,8 @@ const AddTask = () => {
             ></input>
           </div>
         </form>
-      </div>
     </div>
   );
 };
 
-export default AddTask;
-
-// background-color: ;
-// background-image: linear-gradient();
-// background-color: #;
-// background-image: ;
-// background-color: #;
-// background-image: linear-gradient();
+export default EditTask;
