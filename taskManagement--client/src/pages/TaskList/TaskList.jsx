@@ -68,7 +68,7 @@ const TaskList = () => {
                   {showTask.taskName}
                   <div className="badge bg-orange-300 badge-lg ">
                     {" "}
-                    <TbProgressBolt /> {showTask.status}
+                    <TbProgressBolt /> {showTask.state}
                   </div>
                   <div className="badge  bg-blue-400 badge-lg">
                     {" "}

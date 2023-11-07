@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 const AddTask = () => {
   const state = ["Active", "In Progress", "Pending", "Complete"];
-  const [statuses, setStatuses] = useState([state[0]]);
+  const [statuses, setStatuses] = useState([]);
   const handleSelect = (e) => {
     setStatuses(e.target.value);
   };
@@ -17,6 +17,14 @@ const AddTask = () => {
     const state = form.state.value;
     const taskDetail = { taskName, description, date, state };
     console.log(taskDetail);
+    if (state === "Choose ur status") {
+      Swal.fire({
+        title: "select the state",
+        text: "update the state",
+        icon: "error"
+      });
+      return
+    }
     fetch("http://localhost:3000/upload-task", {
       method: "POST",
       headers: {
@@ -27,16 +35,15 @@ const AddTask = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if(data.insertedId)
-        {
+        if (data.insertedId) {
           Swal.fire({
             position: "center",
             icon: "success",
             title: "Your work has been saved",
             showConfirmButton: false,
-            timer: 2300
+            timer: 2300,
           });
-          form.reset()
+          form.reset();
         }
       });
   };
@@ -97,6 +104,7 @@ const AddTask = () => {
                   value={statuses}
                   className=" w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 >
+                  <option selected>Choose ur status</option>
                   {state.map((status) => (
                     <option key={status} value={status}>
                       {status}
@@ -121,9 +129,3 @@ const AddTask = () => {
 
 export default AddTask;
 
-// background-color: ;
-// background-image: linear-gradient();
-// background-color: #;
-// background-image: ;
-// background-color: #;
-// background-image: linear-gradient();
