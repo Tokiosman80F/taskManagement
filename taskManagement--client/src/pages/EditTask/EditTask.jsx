@@ -1,8 +1,13 @@
 import { useState } from "react";
 import TopHeader from "../Shared/TopHeader";
 import Swal from "sweetalert2";
+import { useLoaderData, useParams } from "react-router-dom";
 
 const EditTask = () => {
+    const data=useLoaderData()
+    const {_id,taskName,description,date}=data
+    console.log("the data  =>",data);
+
   const state = ["Active", "In Progress", "Pending", "Complete"];
   const [statuses, setStatuses] = useState([state[0]]);
   const handleSelect = (e) => {
@@ -18,8 +23,8 @@ const EditTask = () => {
     const state = form.state.value;
     const taskDetail = { taskName, description, date, state };
     console.log(taskDetail);
-    fetch("http://localhost:3000/upload-task", {
-      method: "POST",
+    fetch(`http://localhost:3000/update-task/${_id}`, {
+      method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
@@ -28,16 +33,24 @@ const EditTask = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.insertedId) {
+        if (data.modifiedCount>0) {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Your work has been saved",
+            title: "Task Edited 😀",
             showConfirmButton: false,
             timer: 2300,
-          });
+          })
           form.reset();
-        }
+        }  else{
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Already Edited 😀",
+                showConfirmButton: false,
+                timer: 1500,
+              })
+          }
       });
   };
 
@@ -60,6 +73,7 @@ const EditTask = () => {
               className=" w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               type="text"
               name="taskName"
+              defaultValue={taskName}
             />
           </div>
           <div className="w-full  px-3">
@@ -67,6 +81,7 @@ const EditTask = () => {
               Task Description
             </label>
             <textarea
+            defaultValue={description}
               required
               name="description"
               className="h-full min-h-[100px]  w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -80,6 +95,7 @@ const EditTask = () => {
               Date
             </label>
             <input
+            defaultValue={date}
               required
               name="date"
               className="  w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -92,14 +108,17 @@ const EditTask = () => {
             </label>
             <div>
               <select
+              defaultValue={state}
                 required
                 name="state"
                 onChange={handleSelect}
                 value={statuses}
                 className=" w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              
               >
+                
                 {state.map((status) => (
-                  <option key={status} value={status}>
+                  <option  key={status} value={status}>
                     {status}
                   </option>
                 ))}
@@ -111,6 +130,7 @@ const EditTask = () => {
         <div className="w-full ">
           <input
             type="submit"
+            value="Update"
             className="w-full uppercase   bg-orange-400 hover:bg-orange-500 text-white border  rounded py-3 px-4 cursor-pointer "
           ></input>
         </div>

@@ -22,8 +22,9 @@ export const router = createBrowserRouter([
         element: <AddTask />,
       },
       {
-        path:"/edittask",
-        element:<EditTask/>
+        path:"/edittask/:id",
+        element:<EditTask/>,
+        loader:({params})=>fetch(`http://localhost:3000/show-task/${params.id}`)
       }
     ],
   },

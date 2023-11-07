@@ -83,7 +83,7 @@ const TaskList = () => {
                   >
                     <MdDelete /> Delete
                   </button>
-                  <Link to="/edittask">
+                  <Link to={`/edittask/${showTask._id}`}>
                     <button className="badge badge-outline badge-lg bg-blue-500 text-white cursor-pointer ">
                       <BiEdit /> Edit
                     </button>
