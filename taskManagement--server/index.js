@@ -71,7 +71,7 @@ async function run() {
         $set: { ...prevTaskDetail },
       };
       const result = await taskCollection.updateOne(filter, updateTask);
-      console.log({ result });
+      console.log("update",{ result });
       res.send(result);
     });
 
