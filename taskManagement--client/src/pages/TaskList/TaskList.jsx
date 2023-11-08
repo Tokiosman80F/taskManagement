@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const TaskList = () => {
   const [showTasks, setShowTasks] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/show-task`, {
+    fetch(`https://task-management-server-f0uiulezt-tokiosman0135-gmailcom.vercel.app/show-task`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -23,7 +23,7 @@ const TaskList = () => {
   console.log(showTasks);
   const handleDelete = (id) => {
     console.log(id);
-    fetch(`http://localhost:3000/delete-task/${id}`, {
+    fetch(`https://task-management-server-f0uiulezt-tokiosman0135-gmailcom.vercel.app/delete-task/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -67,11 +67,11 @@ const TaskList = () => {
                 <h2 className="card-title">
                   {showTask.taskName}
                   <div className="badge bg-orange-300 badge-lg ">
-                    {" "}
+                    
                     <TbProgressBolt /> {showTask.state}
                   </div>
                   <div className="badge  bg-blue-400 badge-lg">
-                    {" "}
+
                     <TbCalendarFilled /> {showTask.date}
                   </div>
                 </h2>

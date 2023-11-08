@@ -14,18 +14,19 @@ export const router = createBrowserRouter([
         element: <TaskList />,
       },
       {
-        path:"/tasklist",
-        element:<TaskList/>
+        path: "/tasklist",
+        element: <TaskList />,
       },
       {
         path: "/addtask",
         element: <AddTask />,
       },
       {
-        path:"/edittask/:id",
-        element:<EditTask/>,
-        loader:({params})=>fetch(`http://localhost:3000/show-task/${params.id}`)
-      }
+        path: "/edittask/:id",
+        element: <EditTask />,
+        loader: ({ params }) =>
+          fetch(`https://task-management-server-f0uiulezt-tokiosman0135-gmailcom.vercel.app/show-task/${params.id}`),
+      },
     ],
   },
 ]);

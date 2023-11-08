@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TopHeader from "../Shared/TopHeader";
 import Swal from "sweetalert2";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate,  } from "react-router-dom";
 
 const EditTask = () => {
   const data = useLoaderData();
@@ -24,7 +24,7 @@ const EditTask = () => {
     const state = form.state.value;
     const taskDetail = { taskName, description, date, state };
     console.log(taskDetail);
-    fetch(`http://localhost:3000/update-task/${_id}`, {
+    fetch(`https://task-management-server-f0uiulezt-tokiosman0135-gmailcom.vercel.app/update-task/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

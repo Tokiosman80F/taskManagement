@@ -25,7 +25,7 @@ const AddTask = () => {
       });
       return
     }
-    fetch("http://localhost:3000/upload-task", {
+    fetch("https://task-management-server-kr0lz32ua-tokiosman0135-gmailcom.vercel.app//upload-task", {
       method: "POST",
       headers: {
         "content-type": "application/json",
